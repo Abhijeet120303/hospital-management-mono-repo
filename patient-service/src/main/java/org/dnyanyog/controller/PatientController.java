@@ -26,19 +26,19 @@ public class PatientController {
 	}
 
 	@GetMapping(path = "/api/v1/patient/search/{patientId}")
-	public AddPatientResponse searchPatient(@PathVariable Long patientId) {
+	public AddPatientResponse searchPatient(@PathVariable String patientId) {
 		return service.searchPatient(patientId);
 	}
 
 	@PostMapping(path = "/api/v1/patient/edit/{patientId}", consumes = { "application/json",
 			"application/xml" }, produces = { "application/json", "application/xml" })
-	public AddPatientResponse updatePatient(@PathVariable Long patientId, @RequestBody AddPatientRequest request) {
+	public AddPatientResponse updatePatient(@PathVariable String patientId, @RequestBody AddPatientRequest request) {
 		return service.updatePatient(patientId, request);
 	}
 
 	@DeleteMapping(path = "/api/v1/patient/delete/{patientId}", consumes = { "application/json",
 			"application/xml" }, produces = { "application/json", "application/xml" })
-	public AddPatientResponse deletePatient(@PathVariable Long patientId) {
+	public AddPatientResponse deletePatient(@PathVariable String patientId) {
 		return service.deletePatient(patientId);
 
 	}

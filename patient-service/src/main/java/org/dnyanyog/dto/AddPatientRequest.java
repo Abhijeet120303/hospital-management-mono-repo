@@ -13,94 +13,104 @@ import jakarta.validation.constraints.Pattern;
 @Component
 public class AddPatientRequest {
 
-	@NotBlank(message = "Patient name in English is required")
-	private String patientNameInEnglish;
+  @NotBlank(message = "Patient name in English is required")
+  private String patientNameInEnglish;
 
-	@NotBlank(message = "Patient name in Marathi is required")
-	private String patientNameInMarathi;
+  @NotBlank(message = "Patient name in Marathi is required")
+  private String patientNameInMarathi;
 
-	@Digits(integer = 10, fraction = 0, message = "Mobile number should be a 10 digit number")
-	private long mobileNumber;
+  @Digits(integer = 10, fraction = 0, message = "Mobile number should be a 10 digit number")
+  private long mobileNumber;
 
-	@NotBlank(message = "Gender is required")
-	@Pattern(regexp = "Male|Female|Other", message = "Gender must be either Male, Female, or Other")
-	private String gender;
+  @NotBlank(message = "Gender is required")
+  @Pattern(regexp = "Male|Female|Other", message = "Gender must be either Male, Female, or Other")
+  private String gender;
 
-	@NotNull(message = "Birth date is required")
-	@PastOrPresent(message = "Birth date cannot be in the future")
-	private LocalDate birthDate;
+  @NotNull(message = "Birth date is required")
+  @PastOrPresent(message = "Birth date cannot be in the future")
+  private LocalDate birthDate;
 
-	@NotNull(message = "First examination date is required")
-	@PastOrPresent(message = "First examination date cannot be in the future")
-	private LocalDate firstExaminationDate;
+  @NotNull(message = "First examination date is required")
+  @PastOrPresent(message = "First examination date cannot be in the future")
+  private LocalDate firstExaminationDate;
 
-	@NotBlank(message = "Address is required")
-	private String address;
+  @NotBlank(message = "Address is required")
+  private String address;
 
-	public String patientId;
+  @NotBlank(message = "Data Status is required")
+  private String dataStatus;
 
-	public String getPatientId() {
-		return patientId;
-	}
+  public String patientId;
 
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
-	}
+  public String getPatientId() {
+    return patientId;
+  }
 
-	public String getPatientNameInEnglish() {
-		return patientNameInEnglish;
-	}
+  public void setPatientId(String patientId) {
+    this.patientId = patientId;
+  }
 
-	public void setPatientNameInEnglish(String patientNameInEnglish) {
-		this.patientNameInEnglish = patientNameInEnglish;
-	}
+  public String getPatientNameInEnglish() {
+    return patientNameInEnglish;
+  }
 
-	public String getPatientNameInMarathi() {
-		return patientNameInMarathi;
-	}
+  public void setPatientNameInEnglish(String patientNameInEnglish) {
+    this.patientNameInEnglish = patientNameInEnglish;
+  }
 
-	public void setPatientNameInMarathi(String patientNameInMarathi) {
-		this.patientNameInMarathi = patientNameInMarathi;
-	}
+  public String getPatientNameInMarathi() {
+    return patientNameInMarathi;
+  }
 
-	public long getMobileNumber() {
-		return mobileNumber;
-	}
+  public void setPatientNameInMarathi(String patientNameInMarathi) {
+    this.patientNameInMarathi = patientNameInMarathi;
+  }
 
-	public void setMobileNumber(long mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
+  public long getMobileNumber() {
+    return mobileNumber;
+  }
 
-	public String getGender() {
-		return gender;
-	}
+  public void setMobileNumber(long mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  public String getGender() {
+    return gender;
+  }
 
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
 
-	public LocalDate getFirstExaminationDate() {
-		return firstExaminationDate;
-	}
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+  }
 
-	public void setFirstExaminationDate(LocalDate firstExaminationDate) {
-		this.firstExaminationDate = firstExaminationDate;
-	}
+  public LocalDate getFirstExaminationDate() {
+    return firstExaminationDate;
+  }
 
-	public String getAddress() {
-		return address;
-	}
+  public void setFirstExaminationDate(LocalDate firstExaminationDate) {
+    this.firstExaminationDate = firstExaminationDate;
+  }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+  public String getAddress() {
+    return address;
+  }
 
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getDataStatus() {
+    return dataStatus;
+  }
+
+  public void setDataStatus(String dataStatus) {
+    this.dataStatus = dataStatus;
+  }
 }

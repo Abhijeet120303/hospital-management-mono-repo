@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -16,113 +14,116 @@ import jakarta.persistence.Table;
 @Component
 public class Patient {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "patient_id", unique = true, nullable = false)
-	private long patientId;
+  @Id
+  @Column(name = "patient_id", unique = true, nullable = false)
+  private String patientId;
 
-	@Column(name = "patient_name_in_english", nullable = false)
-	private String patientNameInEnglish;
+  @Column(name = "patient_name_in_english", nullable = false)
+  private String patientNameInEnglish;
 
-	@Column(name = "patient_name_in_marathi", nullable = false)
-	private String patientNameInMarathi;
+  @Column(name = "patient_name_in_marathi", nullable = false)
+  private String patientNameInMarathi;
 
-	@Column(name = "mobile_number", nullable = false)
-	private long mobileNumber;
+  @Column(name = "mobile_number", nullable = false)
+  private long mobileNumber;
 
-	@Column(name = "gender", nullable = false)
-	private String gender;
+  @Column(name = "gender", nullable = false)
+  private String gender;
 
-	@Column(name = "birth_date", nullable = false)
-	private LocalDate birthDate;
+  @Column(name = "birth_date", nullable = false)
+  private LocalDate birthDate;
 
-	@Column(name = "first_examination_date", nullable = false)
-	private LocalDate firstExaminationDate;
+  @Column(name = "first_examination_date", nullable = false)
+  private LocalDate firstExaminationDate;
 
-	@Column(name = "address", nullable = false)
-	private String address;
+  @Column(name = "address", nullable = false)
+  private String address;
 
-	public static Patient getInstance() {
-		return new Patient();
-	}
+  @Column(name = "data_status", nullable = false)
+  private String dataStatus;
 
-	public Long getPatientId() {
-		return patientId;
-	}
+  public static Patient getInstance() {
+    return new Patient();
+  }
 
-	public Patient setPatientId(Long patientId) {
-		this.patientId = patientId;
-		return this;
-	}
+  public String getPatientId() {
+    return patientId;
+  }
 
-	public String getPatientNameInEnglish() {
-		return patientNameInEnglish;
-	}
+  public Patient setPatientId(String patientId) {
+    this.patientId = patientId;
+    return this;
+  }
 
-	public Patient setPatientNameInEnglish(String patientNameInEnglish) {
-		this.patientNameInEnglish = patientNameInEnglish;
-		return this;
+  public String getPatientNameInEnglish() {
+    return patientNameInEnglish;
+  }
 
-	}
+  public Patient setPatientNameInEnglish(String patientNameInEnglish) {
+    this.patientNameInEnglish = patientNameInEnglish;
+    return this;
+  }
 
-	public String getPatientNameInMarathi() {
-		return patientNameInMarathi;
-	}
+  public String getPatientNameInMarathi() {
+    return patientNameInMarathi;
+  }
 
-	public Patient setPatientNameInMarathi(String patientNameInMarathi) {
-		this.patientNameInMarathi = patientNameInMarathi;
-		return this;
+  public Patient setPatientNameInMarathi(String patientNameInMarathi) {
+    this.patientNameInMarathi = patientNameInMarathi;
+    return this;
+  }
 
-	}
+  public long getMobileNumber() {
+    return mobileNumber;
+  }
 
-	public long getMobileNumber() {
-		return mobileNumber;
-	}
+  public Patient setMobileNumber(long mobileNumber) {
+    this.mobileNumber = mobileNumber;
+    return this;
+  }
 
-	public Patient setMobileNumber(long mobileNumber) {
-		this.mobileNumber = mobileNumber;
-		return this;
+  public String getGender() {
+    return gender;
+  }
 
-	}
+  public Patient setGender(String gender) {
+    this.gender = gender;
+    return this;
+  }
 
-	public String getGender() {
-		return gender;
-	}
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
 
-	public Patient setGender(String gender) {
-		this.gender = gender;
-		return this;
+  public Patient setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+    return this;
+  }
 
-	}
+  public LocalDate getFirstExaminationDate() {
+    return firstExaminationDate;
+  }
 
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
+  public Patient setFirstExaminationDate(LocalDate firstExaminationDate) {
+    this.firstExaminationDate = firstExaminationDate;
+    return this;
+  }
 
-	public Patient setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-		return this;
+  public String getAddress() {
+    return address;
+  }
 
-	}
+  public Patient setAddress(String address) {
+    this.address = address;
+    return this;
+  }
 
-	public LocalDate getFirstExaminationDate() {
-		return firstExaminationDate;
-	}
+  public String getDataStatus() {
+    return dataStatus;
+  }
 
-	public Patient setFirstExaminationDate(LocalDate firstExaminationDate) {
-		this.firstExaminationDate = firstExaminationDate;
-		return this;
-
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public Patient setAddress(String address) {
-		this.address = address;
-		return this;
-
-	}
-
+  public Patient setDataStatus(String dataStatus) {
+    this.dataStatus = dataStatus;
+    return this;
+  }
 }

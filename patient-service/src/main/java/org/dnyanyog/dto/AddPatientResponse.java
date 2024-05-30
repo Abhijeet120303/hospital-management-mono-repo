@@ -10,104 +10,113 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Component
 public class AddPatientResponse {
 
-	public String status;
+  public String status;
 
-	public String message;
+  public String message;
 
-	public String patientNameInEnglish;
+  public String patientNameInEnglish;
 
-	public String patientNameInMarathi;
+  public String patientNameInMarathi;
 
-	public long mobileNumber;
+  public long mobileNumber;
 
-	public String gender;
+  public String gender;
 
-	public LocalDate birthDate;
+  public LocalDate birthDate;
 
-	public LocalDate firstExaminationDate;
+  public LocalDate firstExaminationDate;
 
-	public String address;
+  public String address;
 
-	public Long patientId;
+  public String patientId;
 
-	public String getPatientNameInEnglish() {
-		return patientNameInEnglish;
-	}
+  public String dataStatus;
 
-	public void setPatientNameInEnglish(String patientNameInEnglish) {
-		this.patientNameInEnglish = patientNameInEnglish;
-	}
+  public String getPatientNameInEnglish() {
+    return patientNameInEnglish;
+  }
 
-	public String getPatientNameInMarathi() {
-		return patientNameInMarathi;
-	}
+  public void setPatientNameInEnglish(String patientNameInEnglish) {
+    this.patientNameInEnglish = patientNameInEnglish;
+  }
 
-	public void setPatientNameInMarathi(String patientNameInMarathi) {
-		this.patientNameInMarathi = patientNameInMarathi;
-	}
+  public String getPatientNameInMarathi() {
+    return patientNameInMarathi;
+  }
 
-	public long getMobileNumber() {
-		return mobileNumber;
-	}
+  public void setPatientNameInMarathi(String patientNameInMarathi) {
+    this.patientNameInMarathi = patientNameInMarathi;
+  }
 
-	public void setMobileNumber(long mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
+  public long getMobileNumber() {
+    return mobileNumber;
+  }
 
-	public String getGender() {
-		return gender;
-	}
+  public void setMobileNumber(long mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  public String getGender() {
+    return gender;
+  }
 
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
+  public LocalDate getBirthDate() {
+    return birthDate;
+  }
 
-	public LocalDate getFirstExaminationDate() {
-		return firstExaminationDate;
-	}
+  public void setBirthDate(LocalDate birthDate) {
+    this.birthDate = birthDate;
+  }
 
-	public void setFirstExaminationDate(LocalDate firstExaminationDate) {
-		this.firstExaminationDate = firstExaminationDate;
-	}
+  public LocalDate getFirstExaminationDate() {
+    return firstExaminationDate;
+  }
 
-	public String getAddress() {
-		return address;
-	}
+  public void setFirstExaminationDate(LocalDate firstExaminationDate) {
+    this.firstExaminationDate = firstExaminationDate;
+  }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+  public String getAddress() {
+    return address;
+  }
 
-	public Long getPatientId() {
-		return patientId;
-	}
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-	public void setPatientId(Long patientId) {
-		this.patientId = patientId;
-	}
+  public String getPatientId() {
+    return patientId;
+  }
 
-	public String getStatus() {
-		return status;
-	}
+  public void setPatientId(String patientId) {
+    this.patientId = patientId;
+  }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+  public String getStatus() {
+    return status;
+  }
 
-	public String getMessage() {
-		return message;
-	}
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+  public String getMessage() {
+    return message;
+  }
 
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public String getDataStatus() {
+    return dataStatus;
+  }
+
+  public void setDataStatus(String dataStatus) {
+    this.dataStatus = dataStatus;
+  }
 }
