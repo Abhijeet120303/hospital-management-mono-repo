@@ -12,17 +12,27 @@ public class AddUserResponse {
 
   public String message;
 
+  public String userId;
+
   public String userName;
 
   public String email;
 
   public String role;
 
-  public String mobileNumber;
+  public Long mobileNumber;
 
   public String password;
 
-  public String confirmPassword;
+  public String dataStatus;
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   public String getStatus() {
     return status;
@@ -72,19 +82,19 @@ public class AddUserResponse {
     this.password = password;
   }
 
-  public String getConfirmPassword() {
-    return confirmPassword;
+  public String getDataStatus() {
+    return dataStatus;
   }
 
-  public void setConfirmPassword(String confirmPassword) {
-    this.confirmPassword = confirmPassword;
+  public void setDataStatus(String dataStatus) {
+    this.dataStatus = dataStatus;
   }
 
-  public String getMobileNumber() {
+  public Long getMobileNumber() {
     return mobileNumber;
   }
 
-  public void setMobileNumber(String mobileNumber) {
+  public void setMobileNumber(Long mobileNumber) {
     this.mobileNumber = mobileNumber;
   }
 }

@@ -3,6 +3,7 @@ package org.dnyanyog.service;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -24,9 +25,9 @@ public class UserServiceImpl implements UserService {
 
   @Autowired UsersRepository repo;
 
-  @Autowired AddUserResponse response;
-
   public AddUserResponse addUser(AddUserRequest request) {
+
+    AddUserResponse response = new AddUserResponse();
 
     Optional<Users> mobileNumber = repo.findByMobileNumber(request.getMobileNumber());
 
@@ -45,7 +46,8 @@ public class UserServiceImpl implements UserService {
               .setRole(request.getRole())
               .setPassword(encryptAES(request.getPassword(), aesKey))
               .setAes_Key(aesKey)
-              .setStatus(request.getStatus());
+              .setStatus(request.getStatus())
+              .setUserId(generateUserId());
 
       try {
         user = repo.save(user);
@@ -55,12 +57,15 @@ public class UserServiceImpl implements UserService {
 
       response.setStatus(ResponseCode.ADD_USER_SUCCESS.getStatus());
       response.setMessage(ResponseCode.ADD_USER_SUCCESS.getMessage());
+      response.setUserId(user.getUserId());
     }
 
     return response;
   }
 
-  public AddUserResponse searchUser(Long userId) {
+  public AddUserResponse searchUser(String userId) {
+
+    AddUserResponse response = new AddUserResponse();
 
     Optional<Users> user = repo.findById(userId);
 
@@ -72,10 +77,11 @@ public class UserServiceImpl implements UserService {
       response.setMessage(ResponseCode.SEARCH_USER_SUCCESS.getMessage());
       response.setUserName(receivedData.getUserName());
       response.setEmail(receivedData.getEmail());
-      response.setMobileNumber(receivedData.getEmail());
+      response.setMobileNumber(receivedData.getMobileNumber());
       response.setRole(receivedData.getRole());
       response.setPassword(receivedData.getPassword());
-      response.setStatus(receivedData.getStatus());
+      response.setDataStatus(receivedData.getStatus());
+
     } else {
       response.setStatus(ResponseCode.SEARCH_USER_FAIL.getStatus());
       response.setMessage(ResponseCode.SEARCH_USER_FAIL.getMessage());
@@ -83,7 +89,9 @@ public class UserServiceImpl implements UserService {
     return response;
   }
 
-  public AddUserResponse updateUser(Long userId, AddUserRequest request) {
+  public AddUserResponse updateUser(String userId, AddUserRequest request) {
+
+    AddUserResponse response = new AddUserResponse();
 
     Optional<Users> user = repo.findById(userId);
 
@@ -99,6 +107,12 @@ public class UserServiceImpl implements UserService {
       receivedData.setPassword(encryptAES(request.getPassword(), aesKey));
       receivedData.setStatus(request.getStatus());
 
+      try {
+        receivedData = repo.save(receivedData);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
       response.setStatus(ResponseCode.UPDATE_USER_SUCCESS.getStatus());
       response.setMessage(ResponseCode.UPDATE_USER_SUCCESS.getMessage());
     } else {
@@ -109,7 +123,9 @@ public class UserServiceImpl implements UserService {
     return response;
   }
 
-  public AddUserResponse deleteUser(Long userId) {
+  public AddUserResponse deleteUser(String userId) {
+
+    AddUserResponse response = new AddUserResponse();
 
     Optional<Users> user = repo.findById(userId);
 
@@ -118,6 +134,12 @@ public class UserServiceImpl implements UserService {
 
       receivedData.setStatus("Deleted");
 
+      try {
+        receivedData = repo.save(receivedData);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
       response.setStatus(ResponseCode.DELETE_USER_SUCCESS.getStatus());
       response.setMessage(ResponseCode.DELETE_USER_SUCCESS.getMessage());
     } else {
@@ -125,6 +147,21 @@ public class UserServiceImpl implements UserService {
       response.setMessage(ResponseCode.DELETE_USER_FAIL.getMessage());
     }
     return response;
+  }
+
+  public static String generateUserId() {
+    String userId = "USR";
+
+    String alphanumericChars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    StringBuilder randomString = new StringBuilder();
+    Random random = new Random();
+    for (int i = 0; i < 6; i++) {
+      randomString.append(alphanumericChars.charAt(random.nextInt(alphanumericChars.length())));
+    }
+
+    userId += randomString.toString();
+
+    return userId;
   }
 
   private String encryptAES(String input, String key) {

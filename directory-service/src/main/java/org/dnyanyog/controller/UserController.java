@@ -27,7 +27,7 @@ public class UserController {
   }
 
   @GetMapping(path = "/api/v1/directory/search/{userId}")
-  public AddUserResponse searchPatient(@PathVariable Long userId) {
+  public AddUserResponse searchPatient(@PathVariable String userId) {
     return service.searchUser(userId);
   }
 
@@ -36,7 +36,7 @@ public class UserController {
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
   public AddUserResponse updatePatient(
-      @PathVariable Long userId, @RequestBody AddUserRequest request) {
+      @PathVariable String userId, @RequestBody AddUserRequest request) {
     return service.updateUser(userId, request);
   }
 
@@ -44,7 +44,7 @@ public class UserController {
       path = "/api/v1/directory/delete/{userId}",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
-  public AddUserResponse deletePatient(@PathVariable Long userId) {
+  public AddUserResponse deletePatient(@PathVariable String userId) {
     return service.deleteUser(userId);
   }
 }

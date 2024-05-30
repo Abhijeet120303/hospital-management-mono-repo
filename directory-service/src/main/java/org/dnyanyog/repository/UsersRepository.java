@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Component
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, String> {
 
   Optional<Users> findByMobileNumber(Long mobileNumber);
 
-  Optional<Users> findByUserId(Long userId);
+  Optional<Users> findById(String userId);
 }

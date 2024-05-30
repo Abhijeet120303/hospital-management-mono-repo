@@ -16,7 +16,7 @@ public class LoginController {
   @Autowired LoginService service;
 
   @PostMapping(
-      path = " /api/v1/directory/validate",
+      path = "/api/v1/directory/validate",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
   public LoginResponse addPatient(@Valid @RequestBody LoginRequest request) {

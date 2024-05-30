@@ -13,7 +13,11 @@ import org.dnyanyog.dto.LoginResponse;
 import org.dnyanyog.entity.Users;
 import org.dnyanyog.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
+@Component
 public class LoginServiceImpl implements LoginService {
 
   @Autowired LoginResponse response;

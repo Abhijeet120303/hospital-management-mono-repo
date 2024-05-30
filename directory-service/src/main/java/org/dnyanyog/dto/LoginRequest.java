@@ -2,11 +2,15 @@ package org.dnyanyog.dto;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.NotNull;
+
 @Component
 public class LoginRequest {
 
+  @NotNull(message = "Mobile number is mandatory")
   public Long mobileNumber;
 
+  @NotNull(message = "Password is mandatory")
   public String password;
 
   public Long getMobileNumber() {

@@ -7,9 +7,9 @@ public interface UserService {
 
   public AddUserResponse addUser(AddUserRequest request);
 
-  public AddUserResponse searchUser(Long userId);
+  public AddUserResponse searchUser(String userId);
 
-  public AddUserResponse updateUser(Long userId, AddUserRequest request);
+  public AddUserResponse updateUser(String userId, AddUserRequest request);
 
-  public AddUserResponse deleteUser(Long userId);
+  public AddUserResponse deleteUser(String userId);
 }
