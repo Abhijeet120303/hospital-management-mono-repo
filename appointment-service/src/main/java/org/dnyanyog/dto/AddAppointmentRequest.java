@@ -26,6 +26,9 @@ public class AddAppointmentRequest {
   @NotBlank(message = "Appointment Time cannot be blank")
   public String appointmentTime;
 
+  @NotBlank(message = "Appointment Id cannot be blank")
+  public String appointmentId;
+
   public String getPatientName() {
     return patientName;
   }
@@ -40,6 +43,14 @@ public class AddAppointmentRequest {
 
   public void setPatientId(String patientId) {
     this.patientId = patientId;
+  }
+
+  public String getAppointmentId() {
+    return appointmentId;
+  }
+
+  public void setAppointmentId(String appointmentId) {
+    this.appointmentId = appointmentId;
   }
 
   public LocalDate getExaminationDate() {

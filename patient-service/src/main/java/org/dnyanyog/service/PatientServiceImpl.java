@@ -1,6 +1,7 @@
 package org.dnyanyog.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.dnyanyog.common.ResponseCode;
@@ -35,9 +36,7 @@ public class PatientServiceImpl implements PatientService {
               .setBirthDate(request.getBirthDate())
               .setFirstExaminationDate(request.getFirstExaminationDate())
               .setAddress(request.getAddress())
-              .setPatientId(generatePatientId())
-              .setDataStatus(request.getDataStatus());
-      ;
+              .setPatientId(generatePatientId());
 
       try {
         patient = repo.save(patient);
@@ -75,7 +74,6 @@ public class PatientServiceImpl implements PatientService {
       response.setAddress(tableData.getAddress());
       response.setMobileNumber(tableData.getMobileNumber());
       response.setFirstExaminationDate(tableData.getFirstExaminationDate());
-      response.setDataStatus(tableData.getDataStatus());
 
       response.setStatus(ResponseCode.SEARCH_PATIENT_SUCCESS.getStatus());
       response.setMessage(ResponseCode.SEARCH_PATIENT_SUCCESS.getMessage());
@@ -95,14 +93,12 @@ public class PatientServiceImpl implements PatientService {
     } else {
       Patient tableData = receivedData.get(0);
 
-      tableData.setPatientNameInEnglish(request.getPatientNameInEnglish());
       tableData.setPatientNameInMarathi(request.getPatientNameInMarathi());
       tableData.setBirthDate(request.getBirthDate());
       tableData.setGender(request.getGender());
       tableData.setMobileNumber(request.getMobileNumber());
       tableData.setFirstExaminationDate(request.getFirstExaminationDate());
       tableData.setAddress(request.getAddress());
-      tableData.setDataStatus(request.getDataStatus());
 
       try {
         tableData = repo.save(tableData);
@@ -120,22 +116,14 @@ public class PatientServiceImpl implements PatientService {
 
     AddPatientResponse response = new AddPatientResponse();
 
-    List<Patient> receiedData = repo.findBypatientId(patientId);
+    Optional<Patient> receiedData = repo.findById(patientId);
 
     if (receiedData.isEmpty()) {
       response.setStatus(ResponseCode.DELETE_PATIENT_FAIL.getStatus());
       response.setMessage(ResponseCode.DELETE_PATIENT_FAIL.getMessage());
     } else {
 
-      Patient data = receiedData.get(0);
-
-      data.setDataStatus("Deleted");
-
-      try {
-        data = repo.save(data);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      repo.deleteById(patientId);
 
       response.setStatus(ResponseCode.DELETE_PATIENT_SUCCESS.getStatus());
       response.setMessage(ResponseCode.DELETE_PATIENT_SUCCESS.getMessage());
@@ -157,5 +145,35 @@ public class PatientServiceImpl implements PatientService {
     patientId += randomString.toString();
 
     return patientId;
+  }
+
+  @Override
+  public AddPatientResponse searchPatientUsingMobileNumber(Long mobileNumber) {
+
+    AddPatientResponse response = new AddPatientResponse();
+
+    List<Patient> patientName = repo.findByMobileNumber(mobileNumber);
+
+    if (patientName.isEmpty()) {
+
+      response.setStatus(ResponseCode.SEARCH_PATIENT_FAIL.getStatus());
+      response.setMessage(ResponseCode.SEARCH_PATIENT_FAIL.getMessage());
+
+    } else {
+      Patient tableData = patientName.get(0);
+
+      response.setPatientNameInEnglish(tableData.getPatientNameInEnglish());
+      response.setPatientNameInMarathi(tableData.getPatientNameInMarathi());
+      response.setBirthDate(tableData.getBirthDate());
+      response.setGender(tableData.getGender());
+      response.setAddress(tableData.getAddress());
+      response.setMobileNumber(tableData.getMobileNumber());
+      response.setFirstExaminationDate(tableData.getFirstExaminationDate());
+
+      response.setStatus(ResponseCode.SEARCH_PATIENT_SUCCESS.getStatus());
+      response.setMessage(ResponseCode.SEARCH_PATIENT_SUCCESS.getMessage());
+    }
+
+    return response;
   }
 }

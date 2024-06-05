@@ -24,8 +24,6 @@ public class AddUserResponse {
 
   public String password;
 
-  public String dataStatus;
-
   public String getUserId() {
     return userId;
   }
@@ -80,14 +78,6 @@ public class AddUserResponse {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public void setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
   }
 
   public Long getMobileNumber() {

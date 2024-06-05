@@ -31,20 +31,8 @@ public class Appointment {
   @Column(name = "appointment_Time", nullable = false)
   private String appointmentTime;
 
-  @Column(name = "data_status", nullable = false)
-  private String dataStatus;
-
   public static Appointment getInstance() {
     return new Appointment();
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public Appointment setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
-    return this;
   }
 
   public String getAppointmentId() {

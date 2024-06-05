@@ -39,9 +39,6 @@ public class Patient {
   @Column(name = "address", nullable = false)
   private String address;
 
-  @Column(name = "data_status", nullable = false)
-  private String dataStatus;
-
   public static Patient getInstance() {
     return new Patient();
   }
@@ -115,15 +112,6 @@ public class Patient {
 
   public Patient setAddress(String address) {
     this.address = address;
-    return this;
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public Patient setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
     return this;
   }
 }

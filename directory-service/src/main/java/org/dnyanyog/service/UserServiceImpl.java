@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
               .setRole(request.getRole())
               .setPassword(encryptAES(request.getPassword(), aesKey))
               .setAes_Key(aesKey)
-              .setStatus(request.getStatus())
               .setUserId(generateUserId());
 
       try {
@@ -80,7 +79,6 @@ public class UserServiceImpl implements UserService {
       response.setMobileNumber(receivedData.getMobileNumber());
       response.setRole(receivedData.getRole());
       response.setPassword(receivedData.getPassword());
-      response.setDataStatus(receivedData.getStatus());
 
     } else {
       response.setStatus(ResponseCode.SEARCH_USER_FAIL.getStatus());
@@ -105,7 +103,6 @@ public class UserServiceImpl implements UserService {
       receivedData.setRole(request.getEmail());
       receivedData.setMobileNumber(request.getMobileNumber());
       receivedData.setPassword(encryptAES(request.getPassword(), aesKey));
-      receivedData.setStatus(request.getStatus());
 
       try {
         receivedData = repo.save(receivedData);
@@ -130,15 +127,7 @@ public class UserServiceImpl implements UserService {
     Optional<Users> user = repo.findById(userId);
 
     if (user.isPresent()) {
-      Users receivedData = user.get();
-
-      receivedData.setStatus("Deleted");
-
-      try {
-        receivedData = repo.save(receivedData);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      repo.deleteById(userId);
 
       response.setStatus(ResponseCode.DELETE_USER_SUCCESS.getStatus());
       response.setMessage(ResponseCode.DELETE_USER_SUCCESS.getMessage());

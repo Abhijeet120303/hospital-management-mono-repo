@@ -30,8 +30,6 @@ public class AddPatientResponse {
 
   public String patientId;
 
-  public String dataStatus;
-
   public String getPatientNameInEnglish() {
     return patientNameInEnglish;
   }
@@ -110,13 +108,5 @@ public class AddPatientResponse {
 
   public void setMessage(String message) {
     this.message = message;
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public void setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
   }
 }

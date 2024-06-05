@@ -32,7 +32,7 @@ public class UserController {
   }
 
   @PostMapping(
-      path = "/api/v1/patient/edit/{userId}",
+      path = "/api/v1/directory/edit/{userId}",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
   public AddUserResponse updatePatient(

@@ -27,8 +27,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             .setPatientId(request.getPatientId())
             .setExaminationDate(request.getExaminationDate())
             .setAppointmentTime(request.getAppointmentTime())
-            .setAppointmentId(generateAppointmentId())
-            .setDataStatus("Active");
+            .setAppointmentId(request.getAppointmentId());
 
     try {
       requestData = repo.save(requestData);
@@ -58,7 +57,6 @@ public class AppointmentServiceImpl implements AppointmentService {
       response.setExaminationDate(receivedData.getExaminationDate());
       response.setAppointmentTime(receivedData.getAppointmentTime());
       response.setAppointmentId(receivedData.getAppointmentId());
-      response.setDataStatus(receivedData.getDataStatus());
 
       response.setStatus(ResponseCode.SEARCH_APPOINTMENT_SUCCESS.getStatus());
       response.setMessage(ResponseCode.SEARCH_APPOINTMENT_SUCCESS.getMessage());
@@ -85,7 +83,6 @@ public class AppointmentServiceImpl implements AppointmentService {
       response.setExaminationDate(receivedData.getExaminationDate());
       response.setAppointmentTime(receivedData.getAppointmentTime());
       response.setAppointmentId(receivedData.getAppointmentId());
-      response.setDataStatus(receivedData.getDataStatus());
 
       response.setStatus(ResponseCode.SEARCH_APPOINTMENT_SUCCESS.getStatus());
       response.setMessage(ResponseCode.SEARCH_APPOINTMENT_SUCCESS.getMessage());
@@ -111,6 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService {
       tableData.setPatientName(request.getPatientName());
       tableData.setPatientId(request.getPatientId());
       tableData.setExaminationDate(request.getExaminationDate());
+
       tableData.setAppointmentTime(request.getAppointmentTime());
 
       try {
@@ -133,22 +131,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     AddAppointmentResponse response = AddAppointmentResponse.getInstance();
 
-    Optional<Appointment> id = repo.findByAppointmentId(appointmentId);
+    Optional<Appointment> id = repo.findById(appointmentId);
 
     if (id.isPresent()) {
-      Appointment tableData = id.get();
 
-      tableData.setDataStatus("Deleted");
-
-      try {
-        tableData = repo.save(tableData);
-        response.setStatus(ResponseCode.DELETE_APPOINTMENT_SUCCESS.getStatus());
-        response.setMessage(ResponseCode.DELETE_APPOINTMENT_SUCCESS.getMessage());
-
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
+      repo.deleteById(appointmentId);
+      response.setStatus(ResponseCode.DELETE_APPOINTMENT_SUCCESS.getStatus());
+      response.setMessage(ResponseCode.DELETE_APPOINTMENT_SUCCESS.getMessage());
     } else {
       response.setStatus(ResponseCode.DELETE_APPOINTMENT_FAIL.getStatus());
       response.setMessage(ResponseCode.DELETE_APPOINTMENT_FAIL.getMessage());

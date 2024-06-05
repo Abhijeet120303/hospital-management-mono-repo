@@ -20,7 +20,7 @@ public class AddCaseResponse {
 
   private String patientId;
 
-  private long caseNumber;
+  private String caseNumber;
 
   private LocalDate ExaminationDate;
 
@@ -28,18 +28,8 @@ public class AddCaseResponse {
 
   public String prescription;
 
-  public String dataStatus;
-
   public static AddCaseResponse getInstance() {
     return new AddCaseResponse();
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public void setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
   }
 
   public String getCaseId() {
@@ -82,11 +72,11 @@ public class AddCaseResponse {
     this.patientId = patientId;
   }
 
-  public long getCaseNumber() {
+  public String getCaseNumber() {
     return caseNumber;
   }
 
-  public void setCaseNumber(long caseNumber) {
+  public void setCaseNumber(String caseNumber) {
     this.caseNumber = caseNumber;
   }
 

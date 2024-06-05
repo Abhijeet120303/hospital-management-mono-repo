@@ -15,7 +15,6 @@ import jakarta.persistence.Table;
 @Component
 public class Cases {
 
-  @Id
   @Column(name = "case_id", unique = true, nullable = false)
   private String caseId;
 
@@ -25,8 +24,9 @@ public class Cases {
   @Column(name = "patient_id", nullable = false)
   private String patientId;
 
+  @Id
   @Column(name = "case_number", nullable = false)
-  private long caseNumber;
+  private String caseNumber;
 
   @Column(name = "examination_date", nullable = false)
   private LocalDate examinationDate;
@@ -37,24 +37,12 @@ public class Cases {
   @Column(name = "Prescription", nullable = false)
   private String Prescription;
 
-  @Column(name = "data_status", nullable = false)
-  private String dataStatus;
-
   public static Cases getInstance() {
     return new Cases();
   }
 
   public String getCaseId() {
     return caseId;
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public Cases setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
-    return this;
   }
 
   public Cases setCaseId(String caseId) {
@@ -80,11 +68,11 @@ public class Cases {
     return this;
   }
 
-  public long getCaseNumber() {
+  public String getCaseNumber() {
     return caseNumber;
   }
 
-  public Cases setCaseNumber(long caseNumber) {
+  public Cases setCaseNumber(String caseNumber) {
     this.caseNumber = caseNumber;
     return this;
   }

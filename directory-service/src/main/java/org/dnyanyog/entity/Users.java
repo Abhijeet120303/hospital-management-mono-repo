@@ -4,8 +4,6 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -32,9 +30,6 @@ public class Users {
 
   @Column(name = "password", nullable = false)
   private String password;
-
-  @Column(name = "status", nullable = false)
-  private String status;
 
   @Column private String aes_Key;
 
@@ -93,15 +88,6 @@ public class Users {
 
   public Users setPassword(String password) {
     this.password = password;
-    return this;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public Users setStatus(String status) {
-    this.status = status;
     return this;
   }
 

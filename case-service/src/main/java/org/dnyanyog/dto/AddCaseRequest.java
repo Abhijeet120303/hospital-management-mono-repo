@@ -20,7 +20,7 @@ public class AddCaseRequest {
   private String patientId;
 
   @NotNull(message = "Case number cannot be null")
-  private long caseNumber;
+  private String caseNumber;
 
   @NotNull(message = "Examination date cannot be null")
   @PastOrPresent(message = "Examination date cannot be in the future")
@@ -48,11 +48,11 @@ public class AddCaseRequest {
     this.patientId = patientId;
   }
 
-  public long getCaseNumber() {
+  public String getCaseNumber() {
     return caseNumber;
   }
 
-  public void setCaseNumber(long caseNumber) {
+  public void setCaseNumber(String caseNumber) {
     this.caseNumber = caseNumber;
   }
 

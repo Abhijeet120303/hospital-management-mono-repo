@@ -24,8 +24,6 @@ public class AddAppointmentResponse {
 
   public String appointmentId;
 
-  public String dataStatus;
-
   public static AddAppointmentResponse getInstance() {
     return new AddAppointmentResponse();
   }
@@ -38,13 +36,7 @@ public class AddAppointmentResponse {
     this.status = status;
   }
 
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public void setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
-  }
+  
 
   public String getMessage() {
     return message;

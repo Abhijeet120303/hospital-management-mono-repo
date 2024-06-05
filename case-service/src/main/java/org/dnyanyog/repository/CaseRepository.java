@@ -14,4 +14,6 @@ public interface CaseRepository extends JpaRepository<Cases, String> {
   Optional<Cases> findByCaseId(String caseId);
 
   Optional<Cases> findByPatientId(String patientId);
+
+  Optional<Cases> findByCaseNumber(String caseNumber);
 }

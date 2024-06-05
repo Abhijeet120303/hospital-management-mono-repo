@@ -16,31 +16,40 @@ import jakarta.validation.Valid;
 @RestController
 public class PatientController {
 
-	@Autowired
-	PatientService service;
+  @Autowired PatientService service;
 
-	@PostMapping(path = "/api/v1/patient/add", consumes = { "application/json", "application/xml" }, produces = {
-			"application/json", "application/xml" })
-	public AddPatientResponse addPatient(@Valid @RequestBody AddPatientRequest request) {
-		return service.addPatient(request);
-	}
+  @PostMapping(
+      path = "/api/v1/patient/add",
+      consumes = {"application/json", "application/xml"},
+      produces = {"application/json", "application/xml"})
+  public AddPatientResponse addPatient(@Valid @RequestBody AddPatientRequest request) {
+    return service.addPatient(request);
+  }
 
-	@GetMapping(path = "/api/v1/patient/search/{patientId}")
-	public AddPatientResponse searchPatient(@PathVariable String patientId) {
-		return service.searchPatient(patientId);
-	}
+  @GetMapping(path = "/api/v1/patient/search/patientId/{patientId}")
+  public AddPatientResponse searchPatient(@PathVariable String patientId) {
+    return service.searchPatient(patientId);
+  }
 
-	@PostMapping(path = "/api/v1/patient/edit/{patientId}", consumes = { "application/json",
-			"application/xml" }, produces = { "application/json", "application/xml" })
-	public AddPatientResponse updatePatient(@PathVariable String patientId, @RequestBody AddPatientRequest request) {
-		return service.updatePatient(patientId, request);
-	}
+  @GetMapping(path = "/api/v1/patient/search/mobileNumber/{mobileNumber}")
+  public AddPatientResponse searchPatientUsingPatientName(@PathVariable Long mobileNumber) {
+    return service.searchPatientUsingMobileNumber(mobileNumber);
+  }
 
-	@DeleteMapping(path = "/api/v1/patient/delete/{patientId}", consumes = { "application/json",
-			"application/xml" }, produces = { "application/json", "application/xml" })
-	public AddPatientResponse deletePatient(@PathVariable String patientId) {
-		return service.deletePatient(patientId);
+  @PostMapping(
+      path = "/api/v1/patient/edit/{patientId}",
+      consumes = {"application/json", "application/xml"},
+      produces = {"application/json", "application/xml"})
+  public AddPatientResponse updatePatient(
+      @PathVariable String patientId, @RequestBody AddPatientRequest request) {
+    return service.updatePatient(patientId, request);
+  }
 
-	}
-
+  @DeleteMapping(
+      path = "/api/v1/patient/delete/{patientId}",
+      consumes = {"application/json", "application/xml"},
+      produces = {"application/json", "application/xml"})
+  public AddPatientResponse deletePatient(@PathVariable String patientId) {
+    return service.deletePatient(patientId);
+  }
 }

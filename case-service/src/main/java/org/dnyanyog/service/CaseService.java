@@ -7,11 +7,11 @@ public interface CaseService {
 
   public AddCaseResponse addCase(AddCaseRequest request);
 
-  public AddCaseResponse searchCase(String caseId);
+  public AddCaseResponse searchCase(String caseNumber);
 
   public AddCaseResponse searchCaseUsingPatientId(String patientId);
 
-  public AddCaseResponse updateCase(String caseId, AddCaseRequest request);
+  public AddCaseResponse updateCase(String caseNumber, AddCaseRequest request);
 
-  public AddCaseResponse deleteCase(String caseId);
+  public AddCaseResponse deleteCase(String caseNumber);
 }

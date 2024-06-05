@@ -27,9 +27,6 @@ public class AddUserRequest {
   @NotNull(message = "Password is mandatory")
   private String password;
 
-  @NotNull(message = "Status is mandatory")
-  private String status;
-
   public String getUserName() {
     return userName;
   }
@@ -68,13 +65,5 @@ public class AddUserRequest {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
   }
 }

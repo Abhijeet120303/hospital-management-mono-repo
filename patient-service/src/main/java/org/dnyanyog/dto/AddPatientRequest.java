@@ -37,9 +37,6 @@ public class AddPatientRequest {
   @NotBlank(message = "Address is required")
   private String address;
 
-  @NotBlank(message = "Data Status is required")
-  private String dataStatus;
-
   public String patientId;
 
   public String getPatientId() {
@@ -104,13 +101,5 @@ public class AddPatientRequest {
 
   public void setAddress(String address) {
     this.address = address;
-  }
-
-  public String getDataStatus() {
-    return dataStatus;
-  }
-
-  public void setDataStatus(String dataStatus) {
-    this.dataStatus = dataStatus;
   }
 }

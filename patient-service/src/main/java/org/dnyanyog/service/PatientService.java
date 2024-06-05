@@ -9,6 +9,8 @@ public interface PatientService {
 
   public AddPatientResponse searchPatient(String patientId);
 
+  public AddPatientResponse searchPatientUsingMobileNumber(Long mobileNUmber);
+
   public AddPatientResponse updatePatient(String patientId, AddPatientRequest request);
 
   public AddPatientResponse deletePatient(String patientId);

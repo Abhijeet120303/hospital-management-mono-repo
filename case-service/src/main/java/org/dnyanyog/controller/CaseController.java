@@ -22,13 +22,13 @@ public class CaseController {
       path = "/api/v1/case/add",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
-  public AddCaseResponse addPatient(@Valid @RequestBody AddCaseRequest request) {
+  public AddCaseResponse addCase(@Valid @RequestBody AddCaseRequest request) {
     return service.addCase(request);
   }
 
-  @GetMapping(path = "/api/v1/case/search/caseId/{caseId}")
-  public AddCaseResponse searchCase(@PathVariable String caseId) {
-    return service.searchCase(caseId);
+  @GetMapping(path = "/api/v1/case/search/caseNumber/{caseNumber}")
+  public AddCaseResponse searchCase(@PathVariable String caseNumber) {
+    return service.searchCase(caseNumber);
   }
 
   @GetMapping(path = "/api/v1/case/search/patientId/{patientId}")
@@ -37,19 +37,19 @@ public class CaseController {
   }
 
   @PostMapping(
-      path = "/api/v1/case/edit/{caseId}",
+      path = "/api/v1/case/edit/{caseNumber}",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
   public AddCaseResponse updateCase(
-      @PathVariable String caseId, @RequestBody AddCaseRequest request) {
-    return service.updateCase(caseId, request);
+      @PathVariable String caseNumber, @RequestBody AddCaseRequest request) {
+    return service.updateCase(caseNumber, request);
   }
 
   @DeleteMapping(
-      path = "/api/v1/case/delete/{caseId}",
+      path = "/api/v1/case/delete/{caseNumber}",
       consumes = {"application/json", "application/xml"},
       produces = {"application/json", "application/xml"})
-  public AddCaseResponse deleteCase(@PathVariable String caseId) {
-    return service.deleteCase(caseId);
+  public AddCaseResponse deleteCase(@PathVariable String caseNumber) {
+    return service.deleteCase(caseNumber);
   }
 }

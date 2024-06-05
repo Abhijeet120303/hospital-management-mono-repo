@@ -32,8 +32,7 @@ public class CaseServiceImpl implements CaseService {
             .setExaminationDate(request.getExaminationDate())
             .setSymptoms(request.getSymptoms())
             .setPrescription(request.getPrescription())
-            .setCaseId(generateCaseId())
-            .setDataStatus("Active");
+            .setCaseId(generateCaseId());
 
     try {
       requestData = repo.save(requestData);
@@ -48,11 +47,11 @@ public class CaseServiceImpl implements CaseService {
     return response;
   }
 
-  public AddCaseResponse searchCase(String caseId) {
+  public AddCaseResponse searchCase(String caseNumber) {
 
     AddCaseResponse response = AddCaseResponse.getInstance();
 
-    Optional<Cases> id = repo.findByCaseId(caseId);
+    Optional<Cases> id = repo.findByCaseNumber(caseNumber);
 
     if (id.isPresent()) {
       Cases receivedData = id.get();
@@ -64,8 +63,6 @@ public class CaseServiceImpl implements CaseService {
       response.setPrescription(receivedData.getPrescription());
       response.setExaminationDate(receivedData.getExaminationDate());
       response.setCaseId(receivedData.getCaseId());
-      response.setDataStatus(receivedData.getDataStatus());
-
 
       response.setStatus(ResponseCode.SEARCH_CASE_SUCCESS.getStatus());
       response.setMessage(ResponseCode.SEARCH_CASE_SUCCESS.getMessage());
@@ -104,17 +101,16 @@ public class CaseServiceImpl implements CaseService {
     return response;
   }
 
-  public AddCaseResponse updateCase(String caseId, AddCaseRequest request) {
+  public AddCaseResponse updateCase(String caseNumber, AddCaseRequest request) {
     AddCaseResponse response = AddCaseResponse.getInstance();
 
-    Optional<Cases> id = repo.findByCaseId(caseId);
+    Optional<Cases> id = repo.findByCaseNumber(caseNumber);
 
     if (id.isPresent()) {
       Cases receivedData = id.get();
 
       receivedData.setPatientName(request.getPatientName());
       receivedData.setPatientId(request.getPatientId());
-      receivedData.setCaseNumber(request.getCaseNumber());
       receivedData.setSymptoms(request.getSymptoms());
       receivedData.setPrescription(request.getPrescription());
       receivedData.setExaminationDate(request.getExaminationDate());
@@ -135,24 +131,17 @@ public class CaseServiceImpl implements CaseService {
     return response;
   }
 
-  public AddCaseResponse deleteCase(String caseId) {
+  public AddCaseResponse deleteCase(String caseNumber) {
 
     AddCaseResponse response = AddCaseResponse.getInstance();
 
-    Optional<Cases> id = repo.findByCaseId(caseId);
+    Optional<Cases> id = repo.findById(caseNumber);
 
     if (id.isPresent()) {
-      Cases receivedData = id.get();
 
-      receivedData.setDataStatus("Deleted");
-
-      try {
-        receivedData = repo.save(receivedData);
-        response.setStatus(ResponseCode.DELETE_CASE_SUCCESS.getStatus());
-        response.setMessage(ResponseCode.DELETE_CASE_SUCCESS.getMessage());
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      repo.deleteById(caseNumber);
+      response.setStatus(ResponseCode.DELETE_CASE_SUCCESS.getStatus());
+      response.setMessage(ResponseCode.DELETE_CASE_SUCCESS.getMessage());
     } else {
       response.setStatus(ResponseCode.DELETE_CASE_FAIL.getStatus());
       response.setMessage(ResponseCode.DELETE_CASE_FAIL.getMessage());
