@@ -1,0 +1,64 @@
+.anchorpane-5 {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.anchorpane-8 {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+/* Rectangle corner styling */
+.rectangle-style {
+    -fx-arc-width: 10;
+    -fx-arc-height: 10;
+}
+
+.button-2{
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.recatangle-2{
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.button-2:hover {
+    -fx-background-color: orange;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-text-fill: white; /* Change text color to white */
+}
+.boxes{
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+.btnManagement{
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.btnManagement:hover{
+    -fx-background-color: orange;
+    -fx-text-fill: rgb(246, 11, 11); /* Change text color to white */
+    
+}
+.field{
+    -fx-border-width: 2px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
