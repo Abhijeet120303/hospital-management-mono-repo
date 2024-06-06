@@ -102,6 +102,47 @@ public class SearchUpdateUserController {
   @FXML
   public void saveData(ActionEvent event) throws InterruptedException {
 
+    String inputUserName = userName.getText().trim();
+    String inputEmail = email.getText().trim();
+    String inputMobileNumber = mobileNumber.getText().trim();
+    String inputRole = role.getText().trim();
+    String inputPassword = password.getText();
+    String inputConfirmPassword = confirmPassword.getText();
+
+    String emailPattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    String mobileNumberPattern = "^[0-9]{10}$";
+    String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+
+    if (inputUserName.isEmpty()) {
+      labelMessage.setText("Username is required!");
+      return;
+    }
+
+    if (!inputEmail.matches(emailPattern)) {
+      labelMessage.setText("Invalid email format!");
+      return;
+    }
+
+    if (!inputMobileNumber.matches(mobileNumberPattern)) {
+      labelMessage.setText("Mobile number must be exactly 10 digits!");
+      return;
+    }
+
+    if (inputRole.isEmpty()) {
+      labelMessage.setText("Role is required!");
+      return;
+    }
+
+    if (!inputPassword.equals(inputConfirmPassword)) {
+      labelMessage.setText("Password and Confirm Password do not match!");
+      return;
+    }
+
+    if (!inputPassword.matches(passwordPattern)) {
+      labelMessage.setText("Password is not strong.");
+      return;
+    }
+
     AddUserRequest table = new AddUserRequest();
 
     table.setUserName(userName.getText());

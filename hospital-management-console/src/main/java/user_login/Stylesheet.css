@@ -63,3 +63,7 @@
     -fx-text-fill: white; /* Change text color to white */
     
 }
+
+.mainBox {
+    background-color: grey;
+}

@@ -6,6 +6,9 @@ import common.RestUtil;
 import dashboard.Dashboard;
 import dto.AddCaseRequest;
 import dto.AddCaseResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -84,6 +87,51 @@ public class AddCaseController {
 
   @FXML
   public void saveData(ActionEvent event) {
+
+    String inputPatientNameEnglish = patientNameEnglish.getText().trim();
+    String inputPatientId = patientId.getText().trim();
+    String inputCaseNumber = caseNumber.getText().trim();
+    String inputSymptoms = symptoms.getText().trim();
+    String inputExaminationDate = examinationDate.getText().trim();
+    String inputPrescription = prescription.getText().trim();
+
+    if (inputPatientNameEnglish.isEmpty()) {
+      labelMessage.setText("Patient name in English is required!");
+      return;
+    }
+
+    if (inputPatientId.isEmpty()) {
+      labelMessage.setText("Patient ID is required!");
+      return;
+    }
+
+    if (inputCaseNumber.isEmpty() || !inputCaseNumber.matches("^[0-9]+$")) {
+      labelMessage.setText("Case number must be a numeric value and is required!");
+      return;
+    }
+
+    if (inputExaminationDate.isEmpty()) {
+      labelMessage.setText("Examination date is required!");
+      return;
+    }
+
+    try {
+      LocalDate.parse(inputExaminationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid examination date format! Use yyyy-MM-dd.");
+      return;
+    }
+
+    if (inputSymptoms.isEmpty()) {
+      labelMessage.setText("Symptoms are required!");
+      return;
+    }
+
+    if (inputPrescription.isEmpty()) {
+      labelMessage.setText("Prescription is required!");
+      return;
+    }
+
     AddCaseRequest addCaseRequest = new AddCaseRequest();
     addCaseRequest.setPatientName(patientNameEnglish.getText());
     addCaseRequest.setPatientId(patientId.getText());

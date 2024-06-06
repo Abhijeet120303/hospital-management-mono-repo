@@ -25,19 +25,19 @@
                <children>
                   <AnchorPane layoutX="760.0" prefHeight="707.0" prefWidth="600.0" style="-fx-background-color: orange;" styleClass="anchorpane-2" stylesheets="@../Style.css">
                      <children>
-                        <Label layoutX="90.0" layoutY="420.0" text="The body when combined with the sense organs, mind and soul, becomes life">
+                        <Label layoutX="118.0" layoutY="423.0" prefHeight="119.0" prefWidth="476.0" text="The body when combined with the sense organs, mind and soul, becomes life">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="252.0" fitWidth="308.0" layoutX="137.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="432.0" fitWidth="344.0" layoutX="165.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@logo.png" />
                            </image>
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="707.0" prefWidth="760.0" style="-fx-background-color: black;">
+                  <AnchorPane prefHeight="707.0" prefWidth="845.0" style="-fx-background-color: black;" styleClass="mainBox">
                      <children>
                         <Label fx:id="label" layoutX="232.0" layoutY="445.0" prefHeight="36.0" prefWidth="358.0" textFill="#f08923">
                            <font>

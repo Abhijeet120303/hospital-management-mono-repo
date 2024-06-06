@@ -7,6 +7,10 @@ import dashboard.Dashboard;
 import dto.AddAppointmentRequest;
 import dto.AddAppointmentResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -110,6 +114,45 @@ public class SearchAppointmentController {
 
   @FXML
   public void saveData(ActionEvent event) throws InterruptedException {
+
+    String inputPatientNameEnglish = patientNameEnglish.getText().trim();
+    String inputPatientID = patientId1.getText().trim();
+    String inputAppointmentTime = appointmentTime.getText().trim();
+    String inputExaminationDate = examinationDate.getText().trim();
+
+    if (inputPatientNameEnglish.isEmpty()) {
+      labelMessage.setText("Patient name in English is required!");
+      return;
+    }
+
+    if (inputPatientID.isEmpty()) {
+      labelMessage.setText("Patient ID is required!");
+      return;
+    }
+
+    if (inputAppointmentTime.isEmpty()) {
+      labelMessage.setText("Appointment time is required!");
+      return;
+    }
+
+    try {
+      LocalTime.parse(inputAppointmentTime, DateTimeFormatter.ofPattern("HH:mm"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid appointment time format! Use HH:mm.");
+      return;
+    }
+
+    if (inputExaminationDate.isEmpty()) {
+      labelMessage.setText("Examination date is required!");
+      return;
+    }
+
+    try {
+      LocalDate.parse(inputExaminationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid examination date format! Use yyyy-MM-dd.");
+      return;
+    }
 
     AddAppointmentRequest table = new AddAppointmentRequest();
 

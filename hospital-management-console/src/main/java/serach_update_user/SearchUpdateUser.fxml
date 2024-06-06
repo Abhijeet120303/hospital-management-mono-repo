@@ -141,6 +141,11 @@
                         </Label>
                         <TextField fx:id="userId" layoutX="202.0" layoutY="25.0" prefHeight="36.0" prefWidth="213.0" styleClass="field" />
                         <Button fx:id="search" layoutX="900.0" layoutY="18.0" mnemonicParsing="false" onAction="#serachData" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: green; -fx-border-color: black;" styleClass="btn" text="Search" textFill="WHITE" />
+                        <Label fx:id="labelMessage" layoutX="453.0" layoutY="70.0" prefHeight="27.0" prefWidth="488.0" textFill="#00ff22">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

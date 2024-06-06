@@ -8,7 +8,10 @@ import dto.AddUserResponse;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import patient_management.PatientManagement;
@@ -100,18 +103,32 @@ public class DeleteUserController {
 
   @FXML
   public void deleteData(ActionEvent event) {
-    try {
-      String deleteUrl = "http://localhost:8080/api/v1/directory/delete/" + userId.getText();
 
-      AddUserResponse status = RestUtil.sendDeleteRequest(deleteUrl, AddUserResponse.class);
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation Dialog");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this user?");
 
-      if (status.getStatus().equals("Success")) {
-        labelMesssage1.setText("User Deleted Successfully !!");
-        System.out.println("DS");
-      } else {
-        System.out.println("F");
+    java.util.Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      try {
+        String deleteUrl = "http://localhost:8080/api/v1/directory/delete/" + userId.getText();
+
+        AddUserResponse status = RestUtil.sendDeleteRequest(deleteUrl, AddUserResponse.class);
+
+        if (status.getStatus().equals("Success")) {
+          labelMesssage1.setText("User Deleted Successfully !!");
+          System.out.println("DS");
+        } else {
+          labelMesssage1.setText("Failed to delete user.");
+          System.out.println("F");
+        }
+      } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+        labelMesssage1.setText("An error occurred while deleting the user.");
       }
-    } catch (IOException | InterruptedException e) {
+    } else {
+      labelMesssage1.setText("User deletion canceled.");
     }
   }
 }

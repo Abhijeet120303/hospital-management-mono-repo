@@ -8,6 +8,9 @@ import dto.AddCaseRequest;
 import dto.AddCaseResponse;
 import dto.AddUserResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -115,6 +118,45 @@ public class SearchUpdateCaseController {
 
   @FXML
   public void saveData(ActionEvent event) throws InterruptedException {
+
+    String inputPatientNameEnglish = patientNameEnglish.getText().trim();
+    String inputPatientId = patientId.getText().trim();
+    String inputSymptoms = symptoms.getText().trim();
+    String inputExaminationDate = examinationDate.getText().trim();
+    String inputPrescription = prescription.getText().trim();
+
+    if (inputPatientNameEnglish.isEmpty()) {
+      labelMessage.setText("Patient name in English is required!");
+      return;
+    }
+
+    if (inputPatientId.isEmpty()) {
+      labelMessage.setText("Patient ID is required!");
+      return;
+    }
+
+    if (inputExaminationDate.isEmpty()) {
+      labelMessage.setText("Examination date is required!");
+      return;
+    }
+
+    try {
+      LocalDate.parse(inputExaminationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid examination date format! Use yyyy-MM-dd.");
+      return;
+    }
+
+    if (inputSymptoms.isEmpty()) {
+      labelMessage.setText("Symptoms are required!");
+      return;
+    }
+
+    if (inputPrescription.isEmpty()) {
+      labelMessage.setText("Prescription is required!");
+      return;
+    }
+
     AddCaseRequest table = new AddCaseRequest();
 
     table.setPatientName(patientNameEnglish.getText());
@@ -133,7 +175,7 @@ public class SearchUpdateCaseController {
         labelMessage.setText("Case Data Successfully Updated !!");
 
       } else {
-        labelMessage.setText("Case Data Successfully Found !!");
+        labelMessage.setText("Case Data Not Updated !!");
 
         System.out.println("F");
       }

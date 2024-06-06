@@ -6,6 +6,10 @@ import common.RestUtil;
 import dashboard.Dashboard;
 import dto.AddAppointmentRequest;
 import dto.AddAppointmentResponse;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -82,6 +86,52 @@ public class AddAppointmentController {
 
   @FXML
   public void saveData(ActionEvent event) {
+
+    String inputPatientNameEnglish = patientNameEnglish.getText().trim();
+    String inputPatientID = patientID.getText().trim();
+    String inputAppointmentId = appointmentId.getText().trim();
+    String inputAppointmentTime = appointmentTime.getText().trim();
+    String inputExaminationDate = examinationDate.getText().trim();
+
+    if (inputPatientNameEnglish.isEmpty()) {
+      labelMessage.setText("Patient name in English is required!");
+      return;
+    }
+
+    if (inputPatientID.isEmpty()) {
+      labelMessage.setText("Patient ID is required!");
+      return;
+    }
+
+    if (inputAppointmentId.isEmpty() || !inputAppointmentId.matches("^[0-9]+$")) {
+      labelMessage.setText("Appointment ID must be a numeric value and is required!");
+      return;
+    }
+
+    if (inputAppointmentTime.isEmpty()) {
+      labelMessage.setText("Appointment time is required!");
+      return;
+    }
+
+    try {
+      LocalTime.parse(inputAppointmentTime, DateTimeFormatter.ofPattern("HH:mm"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid appointment time format! Use HH:mm.");
+      return;
+    }
+
+    if (inputExaminationDate.isEmpty()) {
+      labelMessage.setText("Examination date is required!");
+      return;
+    }
+
+    try {
+      LocalDate.parse(inputExaminationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid examination date format! Use yyyy-MM-dd.");
+      return;
+    }
+
     AddAppointmentRequest addAppointmentRequest = new AddAppointmentRequest();
 
     addAppointmentRequest.setPatientName(patientNameEnglish.getText());

@@ -9,7 +9,10 @@ import dto.AddPatientResponse;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import patient_management.PatientManagement;
@@ -75,19 +78,32 @@ public class DeletePatientController {
 
   @FXML
   public void deleteData(ActionEvent event) {
-    try {
-      String deleteUrl = "http://localhost:8080/api/v1/patient/delete/" + patientId.getText();
 
-      AddPatientResponse status = RestUtil.sendDeleteRequest(deleteUrl, AddPatientResponse.class);
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation Dialog");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this patient?");
 
-      if (status.getStatus().equals("Success")) {
-        System.out.println("DS");
-        labelMessage.setText("Patient Data Successfully Deleted");
-      } else {
+    java.util.Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      try {
+        String deleteUrl = "http://localhost:8080/api/v1/patient/delete/" + patientId.getText();
 
-        System.out.println("F");
+        AddPatientResponse status = RestUtil.sendDeleteRequest(deleteUrl, AddPatientResponse.class);
+
+        if (status.getStatus().equals("Success")) {
+          System.out.println("DS");
+          labelMessage.setText("Patient Data Successfully Deleted");
+        } else {
+          labelMessage.setText("Failed to delete patient data.");
+          System.out.println("F");
+        }
+      } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+        labelMessage.setText("An error occurred while deleting patient data.");
       }
-    } catch (IOException | InterruptedException e) {
+    } else {
+      labelMessage.setText("Patient deletion canceled.");
     }
   }
 

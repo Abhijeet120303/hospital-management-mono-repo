@@ -8,7 +8,10 @@ import dto.AddAppointmentResponse;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import patient_management.PatientManagement;
@@ -114,21 +117,34 @@ public class DeleteAppointmentController {
 
   @FXML
   public void deleteData(ActionEvent event) {
-    try {
-      String deleteUrl =
-          "http://localhost:8080/api/v1/appointment/delete/" + appointmentId.getText();
 
-      AddAppointmentResponse status =
-          RestUtil.sendDeleteRequest(deleteUrl, AddAppointmentResponse.class);
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation Dialog");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this appointment?");
 
-      if (status.getStatus().equals("Success")) {
-        System.out.println("DS");
-        labelMessage.setText("Appointment Data Successfully Deleted !!");
+    java.util.Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      try {
+        String deleteUrl =
+            "http://localhost:8080/api/v1/appointment/delete/" + appointmentId.getText();
 
-      } else {
-        System.out.println("F");
+        AddAppointmentResponse status =
+            RestUtil.sendDeleteRequest(deleteUrl, AddAppointmentResponse.class);
+
+        if (status.getStatus().equals("Success")) {
+          System.out.println("DS");
+          labelMessage.setText("Appointment Data Successfully Deleted !!");
+        } else {
+          labelMessage.setText("Failed to delete appointment data.");
+          System.out.println("F");
+        }
+      } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+        labelMessage.setText("An error occurred while deleting appointment data.");
       }
-    } catch (IOException | InterruptedException e) {
+    } else {
+      labelMessage.setText("Appointment deletion canceled.");
     }
   }
 }

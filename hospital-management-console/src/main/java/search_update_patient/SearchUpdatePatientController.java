@@ -7,6 +7,9 @@ import dashboard.Dashboard;
 import dto.AddPatientRequest;
 import dto.AddPatientResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -117,6 +120,56 @@ public class SearchUpdatePatientController {
 
   @FXML
   public void saveData(ActionEvent event) throws InterruptedException {
+
+    String inputPatientNameMarathi = patientNameMarathi.getText().trim();
+    String inputMobileNumber = mobileNUmber1.getText().trim();
+    String inputBirthDate = birthDate.getText().trim();
+    String inputGender = gender.getText().trim();
+    String inputFirstExaminationDate = firstExaminationDate.getText().trim();
+    String inputAddress = address.getText().trim();
+
+    if (inputPatientNameMarathi.isEmpty()) {
+      labelMessage.setText("Patient name in Marathi is required!");
+      return;
+    }
+
+    if (!inputMobileNumber.matches("^[0-9]{10}$")) {
+      labelMessage.setText("Mobile number must be exactly 10 digits!");
+      return;
+    }
+
+    if (!(inputGender.equalsIgnoreCase("Male")
+        || inputGender.equalsIgnoreCase("Female")
+        || inputGender.equalsIgnoreCase("Other"))) {
+      labelMessage.setText("Gender must be Male, Female, or Other!");
+      return;
+    }
+
+    try {
+      LocalDate birthDate =
+          LocalDate.parse(inputBirthDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      if (!birthDate.isBefore(LocalDate.now())) {
+        labelMessage.setText("Birth date must be in the past!");
+        return;
+      }
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid birth date format! Use yyyy-MM-dd.");
+      return;
+    }
+
+    if (inputAddress.isEmpty()) {
+      labelMessage.setText("Address is required!");
+      return;
+    }
+
+    try {
+      LocalDate firstExamDate =
+          LocalDate.parse(inputFirstExaminationDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    } catch (DateTimeParseException e) {
+      labelMessage.setText("Invalid first examination date format! Use yyyy-MM-dd.");
+      return;
+    }
+
     AddPatientRequest addPatientRequest = new AddPatientRequest();
 
     addPatientRequest.setPatientNameInMarathi(patientNameMarathi.getText());
