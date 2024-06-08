@@ -31,7 +31,6 @@ public class AddPatientRequest {
   private LocalDate birthDate;
 
   @NotNull(message = "First examination date is required")
-  @PastOrPresent(message = "First examination date cannot be in the future")
   private LocalDate firstExaminationDate;
 
   @NotBlank(message = "Address is required")

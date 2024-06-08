@@ -23,7 +23,6 @@ public class AddCaseRequest {
   private String caseNumber;
 
   @NotNull(message = "Examination date cannot be null")
-  @PastOrPresent(message = "Examination date cannot be in the future")
   private LocalDate examinationDate;
 
   @NotBlank(message = "Symptoms cannot be blank")

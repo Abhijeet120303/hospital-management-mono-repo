@@ -20,7 +20,6 @@ public class AddAppointmentRequest {
   private String patientId;
 
   @NotNull(message = "Examination date cannot be null")
-  @PastOrPresent(message = "Examination date cannot be in the future")
   private LocalDate examinationDate;
 
   @NotBlank(message = "Appointment Time cannot be blank")
